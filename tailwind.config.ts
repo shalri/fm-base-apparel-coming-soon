@@ -8,8 +8,28 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        // Primary
+        "ba-desaturated-red": "hsl(0, 36%, 70%)",
+        "ba-soft-red": "hsl(0, 93%, 68%)",
+        // Neutral
+        "ba-dark-grayish-red": "hsl(0, 6%, 24%)",
+      },
       backgroundImage: {
-        // "sample-bg": "/tsugini" // basepath of github pages
+        // Gradients
+        // Linear, 135deg, from hsl(0, 0%, 100%), to hsl(0, 100%, 98%)
+        // Linear, 135deg, from hsl(0, 80%, 86%), to hsl(0, 74%, 74%)
+      },
+      fontFamily: {
+        sans: ["Josefin Sans", "sans-serif"],
+      },
+      fontWeight: {
+        normal: "300",
+        semibold: "400",
+        bold: "600"
+      },
+      fontSize: {
+        base: "16px",
       },
     },
   },
