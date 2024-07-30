@@ -15,27 +15,58 @@ export default function SaturateImage({
   className,
 }: SaturateImageProps) {
   const x = useMotionValue(0);
-  const saturation = useTransform(x, [-window.innerWidth / 2, window.innerWidth / 2], [20, 100]);
-  // const [saturation, setSaturation] = useState(null);
   const [saturationValue, setSaturationValue] = useState(100);
+  const [width, setWidth] = useState<number>(0);
+
+  // Initialize the transform function
+  const saturationTransform = useTransform(x, [-width / 2, width / 2], [20, 100]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      // Set initial width
+      setWidth(window.innerWidth);
+
       const handleMouseMove = (e: MouseEvent) => {
         x.set(e.clientX - window.innerWidth / 2);
       };
 
+      // Update width on resize
+      const handleResize = () => setWidth(window.innerWidth);
+
       document.addEventListener('mousemove', handleMouseMove);
-      const unsubscribe = saturation.onChange((value) => setSaturationValue(value));
+      window.addEventListener('resize', handleResize);
+
+      // Subscribe to changes
+      const unsubscribe = saturationTransform.onChange(value => setSaturationValue(value));
 
       return () => {
         document.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('resize', handleResize);
         unsubscribe();
       };
-    } else {
-      return
     }
-  }, [x, saturation]);
+  }, [x, saturationTransform]);
+  // const x = useMotionValue(0);
+  // // const saturation = useTransform(x, [-window.innerWidth / 2, window.innerWidth / 2], [20, 100]);
+  // const saturation = useTransform(x, [-window.innerWidth / 2, window.innerWidth / 2], [20, 100]);
+  // // const [saturation, setSaturation] = useState(null);
+  // const [saturationValue, setSaturationValue] = useState(100);
+  //
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     const handleMouseMove = (e: MouseEvent) => {
+  //       x.set(e.clientX - window.innerWidth / 2);
+  //     };
+  //
+  //     document.addEventListener('mousemove', handleMouseMove);
+  //     const unsubscribe = saturation.onChange((value) => setSaturationValue(value));
+  //
+  //     return () => {
+  //       document.removeEventListener('mousemove', handleMouseMove);
+  //       unsubscribe();
+  //     };
+  //   }
+  // }, [saturation]);
 
 
   return (
@@ -48,6 +79,5 @@ export default function SaturateImage({
       role="img"
       aria-label={alt}
     />
-
   )
 }
