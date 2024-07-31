@@ -46,6 +46,7 @@ export default function SaturateImage({
       };
     }
   }, [x, saturationTransform]);
+  // This won't work with NextJS (window is undefined)
   // const x = useMotionValue(0);
   // // const saturation = useTransform(x, [-window.innerWidth / 2, window.innerWidth / 2], [20, 100]);
   // const saturation = useTransform(x, [-window.innerWidth / 2, window.innerWidth / 2], [20, 100]);
