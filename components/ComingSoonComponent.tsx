@@ -1,6 +1,5 @@
 "use client";
 import { useState } from 'react';
-import SaturateImage from './SaturateImage';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -50,14 +49,25 @@ export default function ComingSoonComponent() {
               aria-required="true"
               aria-label="Email Address"
               className={cn("placeholder:tracking-wider placeholder:text-ba-desaturated-red/70 h-full placeholder:text-[14px] w-full bg-transparent pl-6 pr-12 focus:outline-none text-ba-desaturated-red focus:bg-transparent rounded-full mr-6 sm:pl-8", hasError ? "error-bg" : "")} />
-            <button
+            <motion.button
               type="submit"
-              className="bg-gradient-to-br from-[hsl(0,80%,86%)] to-[hsl(0,74%,74%)] bg-no-repeat rounded-full h-full w-20 flex items-center justify-center shadow-xl shadow-ba-desaturated-red/60 sm:w-36"
+              className="rounded-full h-full w-20 flex items-center justify-center shadow-xl shadow-ba-desaturated-red/60 sm:w-36 hover:scale-[1.05] transition-all duration-300"
               aria-label="Submit email"
+              whileHover="hover"
+              initial="initial"
+              variants={{
+                initial: {
+                  backgroundImage: 'linear-gradient(to bottom right, hsl(0,80%,86%), hsl(0,74%,74%))',
+                },
+                hover: {
+                  backgroundImage: 'linear-gradient(to bottom right, hsl(0,74%,74%), hsl(0,80%,86%))',
+                  scale: 1.075,
+                },
+              }}
             >
               <span className="sr-only">Submit email</span>
-              <div className="bg-[url(/images/icon-arrow.svg)] bg-center bg-no-repeat h-6 w-6" />
-            </button>
+              <div className="bg-[url(/fm-base-apparel-coming-soon/images/icon-arrow.svg)] bg-center bg-no-repeat size-6 " />
+            </motion.button>
           </form>
           <AnimatePresence>
             {hasError && <motion.p
