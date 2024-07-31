@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${josefin.className} flex min-h-screen flex-col antialiased scroll-smooth text-base bg-ba-desaturated-red/10 sm:grid sm:grid-cols-[58_42]`}>
+      <body className={`${josefin.className} flex min-h-screen flex-col antialiased scroll-smooth text-base bg-ba-desaturated-red/10 sm:max-w-[1175px] sm:mx-auto sm:grid sm:grid-cols-2 sm:items-start sm:content-start sm:min-w-[926px]`}>
         {children}
       </body>
     </html>
